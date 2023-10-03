@@ -4,36 +4,30 @@ export async function seed() {
   const createTable = await sql`
       CREATE TABLE IF NOT EXISTS feed (
         id SERIAL PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) UNIQUE NOT NULL,
-        image VARCHAR(255),
-        "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+        title VARCHAR(255) NOT NULL,
+        created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        name VARCHAR(255)
       );
       `;
 
   console.log(`Created "feed" table`);
 
   const feed = await Promise.all([
-    sql`
-            INSERT INTO feed (name, email, image)
-            VALUES ('Guillermo Rauch', 'rauchg@vercel.com', 'https://pbs.twimg.com/profile_images/1576257734810312704/ucxb4lHy_400x400.jpg')
-            ON CONFLICT (email) DO NOTHING;
-        `,
-    sql`
-            INSERT INTO feed (name, email, image)
-            VALUES ('Lee Robinson', 'lee@vercel.com', 'https://pbs.twimg.com/profile_images/1587647097670467584/adWRdqQ6_400x400.jpg')
-            ON CONFLICT (email) DO NOTHING;
-        `,
-    sql`
-            INSERT INTO feed (name, email, image)
-            VALUES ('Steven Tey', 'stey@vercel.com', 'https://pbs.twimg.com/profile_images/1506792347840888834/dS-r50Je_400x400.jpg')
-            ON CONFLICT (email) DO NOTHING;
-        `,
+    sql`INSERT INTO feed (title, name) VALUES ('😻😻😻', 'Steve');`,
+    sql`INSERT INTO feed (title) VALUES ('🤘🤪🤘');`,
+    sql`INSERT INTO feed (title, name) VALUES ('😏', 'Jim');`,
+    sql`INSERT INTO feed (title, name) VALUES ('😻😻😻😻😻😻😻😻😻😻😻😻😻😻😻', 'Steve');`,
+    sql`INSERT INTO feed (title, name) VALUES ('❤️', 'Steve');`,
+    sql`INSERT INTO feed (title, name) VALUES ('😎🚀', 'Steve');`,
+    sql`INSERT INTO feed (title, name) VALUES ('😂', 'Steve');`,
+    sql`INSERT INTO feed (title, name) VALUES ('🤓', 'Steve');`,
+    sql`INSERT INTO feed (title, name) VALUES ('🤯🤯🤯🤯', 'Steve');`,
+    sql`INSERT INTO feed (title, name) VALUES ('😻', 'Steve');`,
   ]);
   console.log(`Seeded ${feed.length} feed`);
 
   return {
     createTable,
-    users,
+    feed,
   };
 }

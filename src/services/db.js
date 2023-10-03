@@ -6,7 +6,8 @@ export const getFeed = async () => {
   try {
     data = await sql`SELECT * FROM feed`;
   } catch (e) {
-    if (e.message === `relation "feed" does not exist`) {
+    console.log(e);
+    if (e.message.includes(`relation "feed" does not exist`)) {
       console.log(
         "Table does not exist, creating and seeding it with dummy data now..."
       );
@@ -18,22 +19,15 @@ export const getFeed = async () => {
     }
   }
 
-  return data;
+  if (data && data.rows) {
+    return data.rows;
+  }
+  return [];
 
+  // eg...
   //   return [
   //     { id: 3, title: "😻😻😻", created: "2023-10-03", name: "Steve" },
   //     { id: 2, title: "🤘🤪🤘", created: "2023-10-02" },
   //     { id: 1, title: "😏", created: "2023-10-01", name: "Jim" },
-  //     {
-  //       id: 4,
-  //       title: "😻😻😻😻😻😻😻😻😻😻😻😻😻😻😻",
-  //       created: "2023-10-03",
-  //       name: "Steve",
-  //     },
-  //     { id: 5, title: "🤘🤪🤘", created: "2023-10-02" },
-  //     { id: 6, title: "😏", created: "2023-10-01", name: "Jim" },
-  //     { id: 7, title: "😻😻😻", created: "2023-10-03", name: "Steve" },
-  //     { id: 8, title: "🤘🤪🤘", created: "2023-10-02" },
-  //     { id: 9, title: "😏", created: "2023-10-01", name: "Jim" },
   //   ];
 };
