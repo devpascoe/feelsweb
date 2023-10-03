@@ -4,7 +4,7 @@ import { seed } from "@/lib/seed";
 export const getFeed = async () => {
   let data;
   try {
-    data = await sql`SELECT * FROM feed`;
+    data = await sql`SELECT * FROM feed ORDER BY created DESC`;
   } catch (e) {
     console.log(e);
     if (e.message.includes(`relation "feed" does not exist`)) {
@@ -30,4 +30,8 @@ export const getFeed = async () => {
   //     { id: 2, title: "🤘🤪🤘", created: "2023-10-02" },
   //     { id: 1, title: "😏", created: "2023-10-01", name: "Jim" },
   //   ];
+};
+
+export const createPost = async (title, name) => {
+  await sql`INSERT INTO feed (title, name) VALUES (${title}, ${name})`;
 };
