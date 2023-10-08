@@ -7,12 +7,14 @@ export const getFeed = async () => {
     data = await sql`SELECT * FROM feed ORDER BY created DESC`;
   } catch (e) {
     console.log(e);
+    // check if table exists. If not, create new one
     if (e.message.includes(`relation "feed" does not exist`)) {
       console.log(
         "Table does not exist, creating and seeding it with dummy data now..."
       );
-      // Table is not created yet
+      // Create table and populate with initial data
       await seed();
+      // now, select
       data = await sql`SELECT * FROM feed`;
     } else {
       throw e;
@@ -20,8 +22,10 @@ export const getFeed = async () => {
   }
 
   if (data && data.rows) {
+    // returns array of posts
     return data.rows;
   }
+  // fallback, return empty array
   return [];
 
   // eg...

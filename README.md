@@ -1,24 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project built as a sample for University Of Sydney.
+
+You can find slides from the presentation in the "presentation-slides" folder.
 
 ## Getting Started
 
-First, run the development server:
+Create a new .env.local file in the root folder and populate the POSTGRES_URL environment variable with your own value provided by vercel postgres. You can find it in the dashboard.
+
+To run the development server locally:
 
 ```bash
-npm run dev
-# or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Currently `app/page.js` is left default from what comes out of the box but feel free to modify all you want. The page auto-updates as you edit the file.
 
 ## Learn More
 

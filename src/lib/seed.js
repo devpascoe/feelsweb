@@ -1,7 +1,7 @@
 import { sql } from "@vercel/postgres";
 
 export async function seed() {
-  const createTable = await sql`
+  await sql`
       CREATE TABLE IF NOT EXISTS feed (
         id SERIAL PRIMARY KEY,
         title VARCHAR(255) NOT NULL,
@@ -9,7 +9,6 @@ export async function seed() {
         name VARCHAR(255)
       );
       `;
-
   console.log(`Created "feed" table`);
 
   const feed = await Promise.all([
@@ -25,9 +24,4 @@ export async function seed() {
     sql`INSERT INTO feed (title, name) VALUES ('😻', 'Steve');`,
   ]);
   console.log(`Seeded ${feed.length} feed`);
-
-  return {
-    createTable,
-    feed,
-  };
 }
