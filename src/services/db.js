@@ -4,7 +4,7 @@ import { seed } from "@/lib/seed";
 export const getFeed = async () => {
   let data;
   try {
-    data = await sql`SELECT * FROM feed ORDER BY created DESC`;
+    data = await sql`SELECT * FROM feed ORDER BY created DESC LIMIT 100`;
   } catch (e) {
     console.log(e);
     // check if table exists. If not, create new one
@@ -15,7 +15,7 @@ export const getFeed = async () => {
       // Create table and populate with initial data
       await seed();
       // now, select
-      data = await sql`SELECT * FROM feed`;
+      data = await sql`SELECT * FROM feed ORDER BY created DESC LIMIT 100`;
     } else {
       throw e;
     }
